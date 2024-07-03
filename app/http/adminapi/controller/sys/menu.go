@@ -6,13 +6,13 @@ import (
 	"gincms/app/http/adminapi/service/sys"
 	"gincms/app/http/adminapi/types"
 	"gincms/pkg/jsonresp"
+
 	"github.com/gin-gonic/gin"
 )
 
 var MenuCtl = new(menuCtl)
 
-type menuCtl struct {
-}
+type menuCtl struct{}
 
 // AddMenu 添加
 func (m *menuCtl) AddMenu(c *gin.Context) {
@@ -75,7 +75,6 @@ func (m *menuCtl) MenuList(c *gin.Context) {
 		return
 	}
 	jsonresp.JsonOkWithData(&menuList, c)
-
 }
 
 // DelMenu 删除单条
@@ -92,7 +91,6 @@ func (m *menuCtl) DelMenu(c *gin.Context) {
 		return
 	}
 	jsonresp.JsonOk(c)
-
 }
 
 // Authority 获取用户的所有权限
@@ -107,7 +105,7 @@ func (m *menuCtl) Authority(c *gin.Context) {
 
 // Nav  获取用户的菜单列表
 func (m *menuCtl) Nav(c *gin.Context) {
-	menuList, err := auth.GetUserMenu(c, c.GetInt64("uid"), "id,pid,name,url,icon,sort,create_time")
+	menuList, err := auth.GetUserMenu(c, c.GetInt64("uid"), "id,pid,name,url,icon,sort,create_time,open_style")
 	if err != nil {
 		jsonresp.JsonFailWithMessage("获取菜单出错", c)
 		return

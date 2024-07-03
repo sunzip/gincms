@@ -6,8 +6,8 @@
 			</div>
 			<el-scrollbar>
 				<div class="columns-menu">
-					<router-link to="/home">
-						<div class="columns-menu-item" :class="{ active: menuPath === '/home' }">
+					<router-link to="/dashboard/home">
+						<div class="columns-menu-item" :class="{ active: menuPath === '/dashboard/home' }">
 							<svg-icon icon="icon-home"></svg-icon>
 							<span class="title">首页</span>
 						</div>

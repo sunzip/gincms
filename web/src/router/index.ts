@@ -27,6 +27,10 @@ const constantRoutes: RouteRecordRaw[] = [
 		component: () => import('../views/login/index.vue')
 	},
 	{
+		path: '/index',
+		component: () => import('../views/index/index.vue')
+	},
+	{
 		path: '/404',
 		component: () => import('../views/404.vue')
 	}
@@ -35,10 +39,10 @@ const constantRoutes: RouteRecordRaw[] = [
 const asyncRoutes: RouteRecordRaw = {
 	path: '/',
 	component: () => import('../layout/index.vue'),
-	redirect: '/home',
+	redirect: '/dashboard/home',
 	children: [
 		{
-			path: '/home',
+			path: '/dashboard/home',
 			name: 'Home',
 			component: () => import('../views/home.vue'),
 			meta: {
@@ -47,7 +51,7 @@ const asyncRoutes: RouteRecordRaw = {
 			}
 		},
 		{
-			path: '/profile/password',
+			path: '/dashboard/profile/password',
 			name: 'ProfilePassword',
 			component: () => import('../views/profile/password.vue'),
 			meta: {
@@ -56,7 +60,7 @@ const asyncRoutes: RouteRecordRaw = {
 			}
 		},
 		{
-			path: '/online/form/:id',
+			path: '/dashboard/online/form/:id',
 			name: 'OnlineForm',
 			component: () => import('../views/online/form/index.vue'),
 			meta: {
@@ -76,6 +80,13 @@ export const constantMenu = [
 		openStyle: 0,
 		icon: 'icon-windows',
 		children: [
+			{
+				id: 9002,
+				name: '测试',
+				url: 'index/index',
+				openStyle: 1,
+				icon: 'icon-unorderedlist'
+			},
 			{
 				id: 1001,
 				name: 'Icon 图标',
@@ -140,7 +151,7 @@ export const router = createRouter({
 })
 
 // 白名单列表
-const whiteList = ['/login']
+const whiteList = ['/login','/index']
 
 // 路由跳转前
 router.beforeEach(async (to, from, next) => {
@@ -149,7 +160,7 @@ router.beforeEach(async (to, from, next) => {
 	// token存在的情况
 	if (store.userStore.token) {
 		if (to.path === '/login') {
-			next('/home')
+			next('/dashboard/home')
 		} else {
 			// 用户信息不存在，则重新拉取
 			if (!store.userStore.user.id) {

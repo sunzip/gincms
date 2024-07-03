@@ -81,7 +81,7 @@ const onLogin = () => {
 
 		// 用户登录
 		store.userStore.mobileLoginAction(loginForm).then(() => {
-			router.push({ path: '/home' })
+			router.push({ path: '/dashboard/home' })
 		})
 	})
 }

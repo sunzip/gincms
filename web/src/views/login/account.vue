@@ -89,7 +89,7 @@ const onLogin = () => {
 		store.userStore
 			.accountLoginAction(loginForm)
 			.then(() => {
-				router.push({ path: '/home' })
+				router.push({ path: '/dashboard/home' })
 			})
 			.catch(() => {
 				if (captchaVisible.value) {
